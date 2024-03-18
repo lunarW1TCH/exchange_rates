@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use std::error::Error;
 
 const CURRENCIES_PATH: &str = "./api_data/physical_currency_list.csv";
 
@@ -11,7 +10,7 @@ pub struct Currency {
 
 type Currencies = Vec<Currency>;
 
-pub fn read_currencies() -> Result<Currencies, Box<dyn Error>> {
+pub fn read_currencies() -> Result<Currencies, csv::Error> {
     let mut reader = csv::Reader::from_path(CURRENCIES_PATH)?;
     let mut currencies: Vec<Currency> = Vec::new();
 
