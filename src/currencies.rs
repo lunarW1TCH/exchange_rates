@@ -9,7 +9,9 @@ pub struct Currency {
     name: String,
 }
 
-pub async fn read_currencies() -> Result<Vec<Currency>, Box<dyn Error>> {
+type Currencies = Vec<Currency>;
+
+pub fn read_currencies() -> Result<Currencies, Box<dyn Error>> {
     let mut reader = csv::Reader::from_path(CURRENCIES_PATH)?;
     let mut currencies: Vec<Currency> = Vec::new();
 
@@ -19,4 +21,10 @@ pub async fn read_currencies() -> Result<Vec<Currency>, Box<dyn Error>> {
     }
 
     Ok(currencies)
+}
+
+pub fn is_code_supported(currencies: &Currencies, code: String) -> bool {
+    let currency = currencies.iter().find(|el| el.code.eq(&code));
+
+    currency.is_some()
 }
