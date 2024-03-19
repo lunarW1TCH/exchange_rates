@@ -16,6 +16,6 @@ impl Display for UnsupportedCodeError {
 
 pub const FROM_CODE_ERROR: UnsupportedCodeError =
     UnsupportedCodeError("Provided `--from` currency code is not supported.");
-    
+
 pub const TO_CODE_ERROR: UnsupportedCodeError =
     UnsupportedCodeError("Provided `--to` currency code is not supported.");

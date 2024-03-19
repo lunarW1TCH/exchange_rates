@@ -1,8 +1,6 @@
-use std::error::Error;
-
-use clap::Parser;
-
 use crate::currencies::Currencies;
+use clap::Parser;
+use std::error::Error;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None, arg_required_else_help = true)]
@@ -24,6 +22,7 @@ pub struct Args {
     pub amount: Option<f32>,
 }
 
+/// Function to be called as a return result when user requests a list of currencies with their corresponding codes.
 pub fn list_handler(currencies: &Currencies) -> Result<(), Box<dyn Error>> {
     for c in currencies.iter() {
         println!("{} - {}", c.code, c.name);

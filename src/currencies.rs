@@ -10,6 +10,7 @@ pub struct Currency {
 
 pub type Currencies = Vec<Currency>;
 
+/// Returns `Currencies` based on a csv document downloaded from https://www.alphavantage.co/physical_currency_list/
 pub fn read_currencies() -> Result<Currencies, csv::Error> {
     let mut reader = csv::Reader::from_path(CURRENCIES_PATH)?;
     let mut currencies: Currencies = Vec::new();
@@ -22,6 +23,7 @@ pub fn read_currencies() -> Result<Currencies, csv::Error> {
     Ok(currencies)
 }
 
+/// Function for checking whether the provided by user country code is supported by the API.
 pub fn is_code_supported(currencies: &Currencies, code: &String) -> bool {
     let currency = currencies.iter().find(|el| el.code.eq(code));
 
