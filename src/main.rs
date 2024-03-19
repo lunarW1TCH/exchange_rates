@@ -1,14 +1,17 @@
 mod api;
 mod cli;
 mod currencies;
+mod errors;
 
 use clap::Parser;
-use cli::Args;
-
-use crate::{cli::list_handler, currencies::read_currencies};
+use errors::{FROM_CODE_ERROR, TO_CODE_ERROR};
 use std::error::Error;
 
-// TODO: enum for error types
+use crate::{
+    cli::list_handler,
+    currencies::{is_code_supported, read_currencies},
+};
+use cli::Args;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -19,13 +22,17 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return list_handler(&data);
     }
 
+    let from = cli_args.from.unwrap_or("".to_string());
+    let to = cli_args.to.unwrap_or("".to_string());
+    let amount = cli_args.amount.unwrap_or(1.0);
+
+    if !is_code_supported(&data, &from) {
+        return Err(Box::new(FROM_CODE_ERROR));
+    } else if !is_code_supported(&data, &to) {
+        return Err(Box::new(TO_CODE_ERROR));
+    }
+
     let _client = reqwest::Client::new();
-
-    // println!("{:#?}", data);
-    // println!("{}", is_code_supported(&data, "ZWL".to_string()));
-    // println!("{}", is_code_supported(&data, "ZWLs".to_string()));
-
-    dbg!(cli_args);
 
     Ok(())
 }

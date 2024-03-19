@@ -5,7 +5,7 @@ use clap::Parser;
 use crate::currencies::Currencies;
 
 #[derive(Parser, Debug)]
-#[command(version, about, long_about = None)]
+#[command(version, about, long_about = None, arg_required_else_help = true)]
 pub struct Args {
     /// Prints a list of available country codes with their corresponding name.
     #[arg(short, long, exclusive = true)]

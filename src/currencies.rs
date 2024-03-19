@@ -22,8 +22,8 @@ pub fn read_currencies() -> Result<Currencies, csv::Error> {
     Ok(currencies)
 }
 
-pub fn is_code_supported(currencies: &Currencies, code: String) -> bool {
-    let currency = currencies.iter().find(|el| el.code.eq(&code));
+pub fn is_code_supported(currencies: &Currencies, code: &String) -> bool {
+    let currency = currencies.iter().find(|el| el.code.eq(code));
 
     currency.is_some()
 }
