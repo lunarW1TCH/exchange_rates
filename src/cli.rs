@@ -17,7 +17,7 @@ pub struct Args {
     #[arg(short, long, required = false, requires = "to", requires = "amount")]
     pub from: Option<String>,
 
-    /// Amount you would like to convert. For example: `--amount=21.37`
+    /// Amount you would like to convert. For example: `--amount=7.52`
     #[arg(short, long, required = false, requires = "from", requires = "to")]
     pub amount: Option<f32>,
 }
