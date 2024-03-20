@@ -11,6 +11,9 @@ COPY api_data/physical_currency_list.csv api_data/
 
 RUN cargo install --path .
 
+# tests
+RUN cargo test
+
 RUN apt-get update && \
   apt-get install -y ca-certificates && \
   update-ca-certificates

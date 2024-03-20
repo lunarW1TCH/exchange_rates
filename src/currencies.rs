@@ -29,3 +29,25 @@ pub fn is_code_supported(currencies: &Currencies, code: &String) -> bool {
 
     currency.is_some()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_read_currencies() {
+        let currencies = read_currencies().unwrap();
+
+        assert!(!currencies.is_empty())
+    }
+
+    #[test]
+    fn test_is_code_supported() {
+        let currencies = read_currencies().unwrap();
+        let code = "PLN".to_string();
+        let wrong_code = "wrong".to_string();
+
+        assert!(is_code_supported(&currencies, &code));
+        assert!(!is_code_supported(&currencies, &wrong_code));
+    }
+}

@@ -3,17 +3,16 @@ mod cli;
 mod currencies;
 mod errors;
 
-use api::fetch_exchange_rate;
-use clap::Parser;
-use errors::{FROM_CODE_ERROR, TO_CODE_ERROR};
-use std::error::Error;
-
 use crate::{
+    api::fetch_exchange_rate,
     cli::list_handler,
+    cli::Args,
     currencies::{is_code_supported, read_currencies},
+    errors::{FROM_CODE_ERROR, TO_CODE_ERROR},
 };
-use cli::Args;
+use clap::Parser;
 use dotenv::dotenv;
+use std::error::Error;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
