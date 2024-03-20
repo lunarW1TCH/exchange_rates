@@ -37,7 +37,7 @@ cargo build -r
 ### Build
 
 ```sh
-docker build exchange .
+docker build . -t exchange
 ```
 
 ### Help
