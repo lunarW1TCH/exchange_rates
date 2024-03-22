@@ -24,8 +24,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return list_handler(&data);
     }
 
-    let from = cli_args.from.unwrap_or("".to_string().to_uppercase());
-    let to = cli_args.to.unwrap_or("".to_string().to_uppercase());
+    let from = cli_args.from.unwrap_or("".to_string()).to_uppercase();
+    let to = cli_args.to.unwrap_or("".to_string()).to_uppercase();
     let amount = cli_args.amount.unwrap_or(1.0);
 
     if !is_code_supported(&data, &from) {
